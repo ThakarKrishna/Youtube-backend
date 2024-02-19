@@ -1,1 +1,16 @@
 https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj
+
+
+
+models
+========
+Users
+Videos
+subscriptions
+tweets
+likes
+comments
+playlist
+
+
+
