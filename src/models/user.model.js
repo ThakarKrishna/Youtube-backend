@@ -19,7 +19,7 @@ const userSchema = new Schema(
       trim: true,
       unique: true,
     },
-    fulname: {
+    fullname: {
       type: String,
       required: true,
       index: true,
@@ -46,10 +46,10 @@ const userSchema = new Schema(
       type: String,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-userSchema.pre("save", async function () {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   this.password = await bcrypt.hash(this.password, 10);
@@ -73,7 +73,7 @@ userSchema.methods.generateAccessToken = async function () {
     process.env.ACCESS_TOKEN_SECRET,
     {
       expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
-    },
+    }
   );
 };
 
@@ -85,7 +85,7 @@ userSchema.methods.generateRefreshToken = async function () {
     process.env.REFRESH_TOKEN_SECRET,
     {
       expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
-    },
+    }
   );
 };
 
