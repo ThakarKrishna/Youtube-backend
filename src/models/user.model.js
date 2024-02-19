@@ -44,6 +44,7 @@ const userSchema = new Schema(
     },
     refreshToken: {
       type: String,
+      default: null,
     },
   },
   { timestamps: true }
@@ -60,7 +61,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.generateAccessToken = async function () {
+userSchema.methods.generateAccessToken = function () {
   // jwt sign method(payload, secret key, expire in)
 
   return jwt.sign(
@@ -77,7 +78,7 @@ userSchema.methods.generateAccessToken = async function () {
   );
 };
 
-userSchema.methods.generateRefreshToken = async function () {
+userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,
